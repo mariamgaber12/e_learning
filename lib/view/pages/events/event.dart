@@ -31,22 +31,21 @@ class Events extends StatelessWidget {
           elevation: 7,
         ),
         body: Padding(
-          padding: EdgeInsets.all(7),
+          padding: const EdgeInsets.all(7),
           child: SfCalendar(
             showCurrentTimeIndicator: true,
             todayHighlightColor: mainColor,
-            todayTextStyle: TextStyle(color: Colors.white),
+            cellBorderColor: null,
+            todayTextStyle: GoogleFonts.poppins(color: Colors.white),
             allowAppointmentResize: true,
             firstDayOfWeek: 7,
             showDatePickerButton: false,
-            onTap: (value) {
-              return;
-            },
+            onTap: (value) {return;},
             view: CalendarView.month,
             dataSource: MeetingDataSource(_getDataSource()),
             monthViewSettings: const MonthViewSettings(
                 appointmentDisplayMode:
-                    MonthAppointmentDisplayMode.appointment),
+                MonthAppointmentDisplayMode.appointment),
           ),
         ));
   }
