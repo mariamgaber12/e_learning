@@ -5,7 +5,6 @@ import 'package:e_learning/view/components/settings/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 
 class FAQ extends StatefulWidget {
   FAQ({Key? key}) : super(key: key);
@@ -50,7 +49,7 @@ class _FAQState extends State<FAQ> {
           listener: (context, state) {},
           builder: (context, state) {
             var setCubit = SettingsCubit.get(context);
-            return setCubit.faq!.data!.length == null
+            return setCubit.faq == null
                 ? Center(
                     child: CircularProgressIndicator(
                     color: mainColor,

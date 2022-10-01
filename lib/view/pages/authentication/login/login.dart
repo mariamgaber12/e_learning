@@ -80,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   defaultTaskFormField(
                       controller: passController,
                       hint: 'Password',
+                      obscure: !_passwordVisible,
                       suffixIcon: IconButton(
                         icon: Icon(_passwordVisible
                             ? Icons.visibility

@@ -35,7 +35,7 @@ class LectureCubit extends Cubit<LectureState>{
     emit(GetAllLectureLoadingState());
     DioHelper.getData(
       url: sectionEndPoint,
-      token:accessToken,
+      token: accessToken,
     ).then((value) {
       print(value.statusMessage);
       sections = Section.fromJson(value.data);

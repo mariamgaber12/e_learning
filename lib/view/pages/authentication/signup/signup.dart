@@ -5,18 +5,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../res/colors.dart';
 import '../../../components/auth/components.dart';
 import '../../../components/components.dart';
-import '../../home_layout.dart';
 import '../login/login.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   SignupScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController conPassController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-
   final List<String> genderList = <String>['Male', 'Female'];
   String genderDropdownValue = 'Male';
   final List<String> universityList = <String>['AUC','Cairo','ELU','GUC','Helwan','HTI'];
@@ -92,7 +95,7 @@ class SignupScreen extends StatelessWidget {
                         defaultTaskFormField(
                             controller: passController,
                             hint: 'Password',
-                            obscure: mainCubit.passwordVisible1,
+                            obscure: !mainCubit.passwordVisible1,
                             suffixIcon: IconButton(
                               icon: Icon(mainCubit.passwordVisible1 == true
                                   ? Icons.visibility
@@ -106,7 +109,7 @@ class SignupScreen extends StatelessWidget {
                         defaultTaskFormField(
                             controller: conPassController,
                             hint: 'Confirm Password',
-                            obscure: mainCubit.passwordVisible2,
+                            obscure: !mainCubit.passwordVisible2,
                             suffixIcon: IconButton(
                               icon: Icon(mainCubit.passwordVisible2 == true
                                   ? Icons.visibility
@@ -144,7 +147,7 @@ class SignupScreen extends StatelessWidget {
                                       list: genderList.toList(),
                                       onChange: (String? value) {
                                         //mainCubit.getDropDown(value: value!);
-                                        genderDropdownValue = value!;
+                                        setState(()=>genderDropdownValue = value!);
                                       },
                                       dropdownValue: genderDropdownValue
                                     ),
@@ -167,7 +170,7 @@ class SignupScreen extends StatelessWidget {
                                       list:  universityList,
                                       onChange: (String? value) {
                                         //mainCubit.getDropDown(value: value!);
-                                        universityDropdownValue = value!;
+                                        setState(()=>genderDropdownValue = value!);
                                       },
                                       dropdownValue: universityDropdownValue
                                     ),
@@ -192,7 +195,7 @@ class SignupScreen extends StatelessWidget {
                                   list: gradeList,
                                   onChange: (String? value) {
                                     //mainCubit.getDropDown(value: value!);
-                                    gradeDropdownValue = value!;
+                                    setState(()=>genderDropdownValue = value!);
                                   },
                                   dropdownValue: gradeDropdownValue
                                 ),
@@ -206,7 +209,7 @@ class SignupScreen extends StatelessWidget {
                         buildButton(
                             name: 'Sign Up',
                             onPress: () {
-                              navigateTo(context, const HomeLayout());
+                              navigateTo(context, const LoginScreen());
                             }),
                       ],
                     );

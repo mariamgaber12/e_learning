@@ -133,19 +133,9 @@ Widget lecCard({
   );
 }
 
-Widget popButton({required state}) {
-  final List<String> filterList = <String>[
-    'All Lectures',
-    'Finished Lecture',
-    'Remaining Lecture'
-  ];
+Widget popButton({required filterList,required state, required onSelect}) {
+
   return PopupMenuButton(
-    child: SvgPicture.asset(
-      'assets/icons/filter.svg',
-      color: mainColor,
-      width: 30,
-      height: 25,
-    ),
     itemBuilder: (context) => [
       PopupMenuItem(
         value: filterList[0],
@@ -160,14 +150,12 @@ Widget popButton({required state}) {
         child: Text(filterList[2]),
       ),
     ],
-    onSelected: (String value) {
-      if (value == filterList[0]) {
-        state = true;
-      } else if (value == filterList[1]) {
-        state = false;
-      } else if (value == filterList[2]) {
-        state = true;
-      }
-    },
+    onSelected: onSelect,
+    child: SvgPicture.asset(
+      'assets/icons/filter.svg',
+      color: mainColor,
+      width: 30,
+      height: 25,
+    )
   );
 }

@@ -2,7 +2,6 @@ import 'package:e_learning/res/colors.dart';
 import 'package:e_learning/view/components/lectures/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../cubit/lectures/lecture_cubit.dart';
 import '../../../cubit/lectures/lecture_state.dart';
@@ -12,24 +11,43 @@ class SectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state=true;
+    var state = true;
+    List filterList = <String>[
+      'All Sections',
+      'Finished Sections',
+      'Remaining Sections'
+    ];
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios,color: mainColor,),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: mainColor,
+          ),
         ),
-        title: Text('Sections',  style: GoogleFonts.poppins(
-            fontSize: 22,
-            color: Colors.black,
-            fontWeight: FontWeight.w600),),
+        title: Text(
+          'Sections',
+          style: GoogleFonts.poppins(
+              fontSize: 22, color: Colors.black, fontWeight: FontWeight.w600),
+        ),
         centerTitle: true,
         elevation: 7,
         actions: [
           popButton(
-              state: state
+            filterList: filterList,
+            state: state,
+            onSelect: (String value) {
+              if (value == filterList[0]) {
+                state = true;
+              } else if (value == filterList[1]) {
+                state = false;
+              } else if (value == filterList[2]) {
+                state = true;
+              }
+            },
           ),
           const Text('    '),
         ],
@@ -48,38 +66,41 @@ class SectionScreen extends StatelessWidget {
                 ),
                 state == true
                     ? Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [Text('No Sections')],
-                    ))
-                    :lecCubit.sections == null
-                    ? Center(
-                  child: CircularProgressIndicator(color: mainColor,),
-                )
-                    : ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    int end = lecCubit.sections!.data![index]
-                        .sectionEndTime! as int;
-                    int start = lecCubit.sections!.data![index]
-                        .sectionStartTime! as int;
-                    int duration = end - start;
-                    return lecCard(
-                        title: lecCubit
-                            .sections!.data![index].sectionSubject!,
-                        duration: '$duration',
-                        day: lecCubit
-                            .sections!.data![index].sectionDate!,
-                        startTime: lecCubit.sections!.data![index]
-                            .sectionStartTime!,
-                        endTime: lecCubit.sections!.data![index]
-                            .sectionStartTime!);
-                  },
-                  itemCount: lecCubit.sections!.data!.length,
-                  separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(
-                    height: 2,
-                  ),
-                ),
+                        child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [Text('No Sections')],
+                      ))
+                    : lecCubit.sections == null
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: mainColor,
+                            ),
+                          )
+                        : ListView.separated(
+                            itemBuilder: (BuildContext context, int index) {
+                              int end = lecCubit.sections!.data![index]
+                                  .sectionEndTime! as int;
+                              int start = lecCubit.sections!.data![index]
+                                  .sectionStartTime! as int;
+                              int duration = end - start;
+                              return lecCard(
+                                  title: lecCubit
+                                      .sections!.data![index].sectionSubject!,
+                                  duration: '$duration',
+                                  day: lecCubit
+                                      .sections!.data![index].sectionDate!,
+                                  startTime: lecCubit
+                                      .sections!.data![index].sectionStartTime!,
+                                  endTime: lecCubit.sections!.data![index]
+                                      .sectionStartTime!);
+                            },
+                            itemCount: lecCubit.sections!.data!.length,
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const SizedBox(
+                              height: 2,
+                            ),
+                          ),
               ],
             );
           },
