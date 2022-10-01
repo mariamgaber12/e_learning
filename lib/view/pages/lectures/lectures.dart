@@ -46,7 +46,7 @@ class _LecturesState extends State<Lectures> {
           popButton(
             filterList: filterList,
             state: state,
-            onSelect: (String value) {
+            onSelect: ( value) {
               if (value == filterList[0]) {
                 state = true;
               } else if (value == filterList[1]) {
@@ -60,14 +60,29 @@ class _LecturesState extends State<Lectures> {
         ],
       ),
       body: BlocProvider(
-        create: (context) => LectureCubit()..getLectures(),
+        create: (context) => LectureCubit(),
         child: BlocConsumer<LectureCubit, LectureState>(
           listener: (context, state) {},
           builder: (context, state) {
             var lecCubit = LectureCubit.get(context);
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
+                const SizedBox(
+                  height: 10,
+                ),
+                lecCard(
+                    title: 'C++',
+                    duration: '2',
+                    day: 'Tuesday',
+                    startTime: '12:00',
+                    endTime: '02:00'
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
                 state == true
                     ? Center(
                         child: Row(

@@ -32,46 +32,48 @@ class TermsConditions extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          BlocProvider(
-            create: (context) => SettingsCubit()..getTerms(),
-            child: BlocConsumer<SettingsCubit, SettingsState>(
+      body: BlocProvider(
+        create: (context) => SettingsCubit(),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            BlocConsumer<SettingsCubit, SettingsState>(
               listener: (context, state) {},
               builder: (context, state) {
                 var setCubit = SettingsCubit.get(context);
                 return setCubit.terms == null
                     ? Center(
-                        child: CircularProgressIndicator(
-                        color: mainColor,
-                      ))
+                    child: CircularProgressIndicator(
+                      color: mainColor,
+                    ))
                     : Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child:                              RichText(
-                              text: HTML.toTextSpan(context,
-                                  setCubit.terms!.data!.terms!.toString(),
-                                  linksCallback: (link) {},
-                                  defaultTextStyle:
-                                  GoogleFonts.poppins(fontWeight: FontWeight.w300,
-                                      fontSize: 18,color: Colors.grey),
-                                  overrideStyle: {
-                                    "p":   GoogleFonts.poppins(fontSize: 19,fontWeight: FontWeight.w400),
-                                    "a":   GoogleFonts.poppins(wordSpacing: 2,fontWeight: FontWeight.w200),
-                                  })),
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: RichText(
+                        text: HTML.toTextSpan(context,
+                            setCubit.terms!.data!.terms!.toString(),
+                            linksCallback: (link) {},
+                            defaultTextStyle:
+                            GoogleFonts.poppins(fontWeight: FontWeight.w300,
+                                fontSize: 18, color: Colors.grey),
+                            overrideStyle: {
+                              "p": GoogleFonts.poppins(
+                                  fontSize: 19, fontWeight: FontWeight.w400),
+                              "a": GoogleFonts.poppins(
+                                  wordSpacing: 2, fontWeight: FontWeight.w200),
+                            })),
 
-                        ),
-                      );
+                  ),
+                );
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

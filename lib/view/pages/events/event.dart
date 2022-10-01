@@ -56,7 +56,7 @@ class Events extends StatelessWidget {
     final DateTime startTime = DateTime(today.year, today.month, today.day, 12);
     final DateTime endTime = startTime.add(const Duration(hours: 5));
     meetings.add(Meeting(' Event', startTime, endTime, mainColor, true));
-    meetings.add(Meeting(' Event', startTime, endTime, Colors.grey.shade200, true));
+    meetings.add(Meeting(' Event', startTime, endTime, Colors.grey.shade600, true));
 
     return meetings;
   }

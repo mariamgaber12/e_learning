@@ -20,11 +20,11 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController passController = TextEditingController();
   TextEditingController conPassController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  final List<String> genderList = <String>['Male', 'Female'];
+  final List<String>? genderList = <String>['Male', 'Female'];
   String genderDropdownValue = 'Male';
-  final List<String> universityList = <String>['AUC','Cairo','ELU','GUC','Helwan','HTI'];
+  final List<String>? universityList = <String>['AUC','Cairo','ELU','GUC','Helwan','HTI'];
   String universityDropdownValue = 'AUC';
-  final List<String> gradeList = <String>['Grade 1', 'Grade 2', 'Grade 3' , 'Grade 4', 'Grade 5'];
+  final List<String>? gradeList = <String>['Grade 1', 'Grade 2', 'Grade 3' , 'Grade 4', 'Grade 5'];
   String gradeDropdownValue = 'Grade 1';
 
   @override
@@ -80,12 +80,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   listener: (context, state) {},
                   builder: (context, state) {
                     var mainCubit = MainCubit.get(context);
-                    //Iterable university = mainCubit.university!.data!;
-                    //List? grade = mainCubit.grade!.data!;
                     return Column(
                       children: [
                         defaultTaskFormField(
-                            controller: emailController,
+                            controller: nameController,
                             hint: 'Name',
                             type: TextInputType.name),
                         defaultTaskFormField(
@@ -144,10 +142,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                       height: 11,
                                     ),
                                     buildDropdown(
-                                      list: genderList.toList(),
-                                      onChange: (String? value) {
-                                        //mainCubit.getDropDown(value: value!);
-                                        setState(()=>genderDropdownValue = value!);
+                                      list: genderList!,
+                                      onChange: (value) {
+                                        setState(()=>genderDropdownValue = value);
                                       },
                                       dropdownValue: genderDropdownValue
                                     ),
@@ -167,12 +164,11 @@ class _SignupScreenState extends State<SignupScreen> {
                                       height: 11,
                                     ),
                                     buildDropdown(
-                                      list:  universityList,
-                                      onChange: (String? value) {
-                                        //mainCubit.getDropDown(value: value!);
-                                        setState(()=>genderDropdownValue = value!);
+                                      list:  universityList!,
+                                      dropdownValue: universityDropdownValue,
+                                      onChange: (value) {
+                                        setState(()=>genderDropdownValue = value);
                                       },
-                                      dropdownValue: universityDropdownValue
                                     ),
                                   ],
                                 ),
@@ -192,10 +188,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                   height: 11,
                                 ),
                                 buildDropdown(
-                                  list: gradeList,
-                                  onChange: (String? value) {
-                                    //mainCubit.getDropDown(value: value!);
-                                    setState(()=>genderDropdownValue = value!);
+                                  list: gradeList!,
+                                  onChange: ( value) {
+                                    setState(()=>genderDropdownValue = value);
                                   },
                                   dropdownValue: gradeDropdownValue
                                 ),

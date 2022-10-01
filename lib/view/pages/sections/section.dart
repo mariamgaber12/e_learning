@@ -39,7 +39,7 @@ class SectionScreen extends StatelessWidget {
           popButton(
             filterList: filterList,
             state: state,
-            onSelect: (String value) {
+            onSelect: ( value) {
               if (value == filterList[0]) {
                 state = true;
               } else if (value == filterList[1]) {
@@ -53,14 +53,24 @@ class SectionScreen extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => LectureCubit()..getSections(),
+        create: (context) => LectureCubit(),
         child: BlocConsumer<LectureCubit, LectureState>(
           listener: (context, state) {},
           builder: (context, state) {
             var lecCubit = LectureCubit.get(context);
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                lecCard(
+                    title: 'C++',
+                    duration: '2',
+                    day: 'Tuesday',
+                    startTime: '02:00',
+                    endTime: '04:00'
+                ),
                 const SizedBox(
                   height: 10,
                 ),

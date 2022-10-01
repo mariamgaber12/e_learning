@@ -11,13 +11,10 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return BlocProvider(
-  create: (context) => MainCubit(),
-  child: BlocConsumer <MainCubit,MainState >(
+    return BlocConsumer<MainCubit, MainState>(
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, Object? state) {
-        var homeCubit =  MainCubit.get(context);
+        var homeCubit = MainCubit.get(context);
         return Scaffold(
           body: homeCubit.homeScreens[homeCubit.currentNavBarItem],
           bottomNavigationBar: Container(
@@ -26,34 +23,42 @@ class HomeLayout extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(10),
-              boxShadow:[
+              boxShadow: [
                 BoxShadow(
                   color: Colors.grey[350]!,
-                  offset: const Offset(0.0, 0.0,),
+                  offset: const Offset(
+                    0.0,
+                    0.0,
+                  ),
                   blurRadius: 7,
                   spreadRadius: 1.5,
                 ),
               ],
             ),
             child: GNav(
-                onTabChange: (index){
-                  homeCubit.changeCurrentNavBarItem(index);},
+                onTabChange: (index) {
+                  homeCubit.changeCurrentNavBarItem(index);
+                },
                 rippleColor: Colors.grey[500]!,
                 hoverColor: Colors.grey[500]!,
                 haptic: true,
                 tabBorderRadius: 25,
-                tabActiveBorder: Border.all(color: Colors.grey.shade300, width: .005), // tab button border
-                tabBorder: Border.all(color: Colors.grey.shade100), // tab button border
+                tabActiveBorder: Border.all(
+                    color: Colors.grey.shade300,
+                    width: .005), // tab button border
+                tabBorder: Border.all(
+                    color: Colors.grey.shade100), // tab button border
                 curve: Curves.easeOutExpo,
                 duration: const Duration(milliseconds: 300),
                 gap: 6,
                 color: Colors.grey[800],
                 iconSize: 28,
-                activeColor:mainColor,
+                activeColor: mainColor,
                 //iconSize: 30,
                 tabBackgroundColor: Colors.grey.withOpacity(0.2),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8), // navigation bar padding
-                tabs:   const [
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 8), // navigation bar padding
+                tabs: const [
                   GButton(
                     //leading: SvgPicture.asset('assets/icons/home.svg',color: Colors.grey[800],),
                     icon: Icons.home_outlined,
@@ -72,11 +77,10 @@ class HomeLayout extends StatelessWidget {
                     text: 'Settings',
                     //iconColor: Colors.white,
                   ),
-                ]
-            ),
+                ]),
           ),
-        ); },
-    ),
-);
+        );
+      },
+    );
   }
 }

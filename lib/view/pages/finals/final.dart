@@ -40,7 +40,7 @@ class FinalScreen extends StatelessWidget {
           popButton(
             filterList: filterList,
             state: state,
-            onSelect: (String value) {
+            onSelect: (value) {
               if (value == filterList[0]) {
                 state = true;
               } else if (value == filterList[1]) {
@@ -54,53 +54,66 @@ class FinalScreen extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => LectureCubit()..getExams(),
+        create: (context) => LectureCubit(),
         child: BlocConsumer<LectureCubit, LectureState>(
           listener: (context, state) {},
           builder: (context, state) {
             var lecCubit = LectureCubit.get(context);
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
+                const SizedBox(
+                  height: 10,
+                ),
+
+                lecCard(
+                title: 'Flutter',
+                duration: '2',
+                day: 'Monday',
+                startTime: '12:00',
+                endTime: '02:00'
+                ),
+
                 const SizedBox(
                   height: 10,
                 ),
                 state == true
                     ? Center(
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [Text('No Finals')],
-                      ))
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [Text('No Finals')],
+                    ))
                     : lecCubit.exams == null
-                        ? Center(
-                            child: CircularProgressIndicator(
-                              color: mainColor,
-                            ),
-                          )
-                        : ListView.separated(
-                            itemBuilder: (BuildContext context, int index) {
-                              int end = lecCubit
-                                  .exams!.data![index].examEndTime! as int;
-                              int start = lecCubit
-                                  .exams!.data![index].examStartTime! as int;
-                              int duration = end - start;
-                              return lecCard(
-                                  title:
-                                      lecCubit.exams!.data![index].examSubject!,
-                                  duration: '$duration',
-                                  day: lecCubit.exams!.data![index].examDate!,
-                                  startTime: lecCubit
-                                      .exams!.data![index].examStartTime!,
-                                  endTime: lecCubit
-                                      .exams!.data![index].examStartTime!);
-                            },
-                            itemCount: lecCubit.exams!.data!.length,
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                              height: 2,
-                            ),
-                          ),
+                    ? Center(
+                  child: CircularProgressIndicator(
+                    color: mainColor,
+                  ),
+                )
+                    : ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    int end = lecCubit
+                        .exams!.data![index].examEndTime! as int;
+                    int start = lecCubit
+                        .exams!.data![index].examStartTime! as int;
+                    int duration = end - start;
+                    return lecCard(
+                        title:
+                        lecCubit.exams!.data![index].examSubject!,
+                        duration: '$duration',
+                        day: lecCubit.exams!.data![index].examDate!,
+                        startTime: lecCubit
+                            .exams!.data![index].examStartTime!,
+                        endTime: lecCubit
+                            .exams!.data![index].examStartTime!);
+                  },
+                  itemCount: lecCubit.exams!.data!.length,
+                  separatorBuilder:
+                      (BuildContext context, int index) =>
+                  const SizedBox(
+                    height: 2,
+                  ),
+                ),
               ],
             );
           },

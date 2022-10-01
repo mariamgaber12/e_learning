@@ -44,7 +44,7 @@ class _FAQState extends State<FAQ> {
         elevation: 0,
       ),
       body: BlocProvider(
-        create: (context) => SettingsCubit()..getFAQ(),
+        create: (context) => SettingsCubit(),
         child: BlocConsumer<SettingsCubit, SettingsState>(
           listener: (context, state) {},
           builder: (context, state) {

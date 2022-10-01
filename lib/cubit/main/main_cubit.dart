@@ -43,13 +43,11 @@ class MainCubit extends Cubit<MainState> {
   bool passwordVisible2 = false;
   void changeVisiblePassword1(){
     passwordVisible1 = !passwordVisible1;
-
     emit(ChangeVisiblePassword());
   }
 
   void changeVisiblePassword2(){
     passwordVisible2 = !passwordVisible2;
-
     emit(ChangeVisiblePassword());
   }
 
@@ -90,7 +88,6 @@ class MainCubit extends Cubit<MainState> {
       emit(GetGradeErrorState());
     });
   }
-
 */
 
   News? news ;
